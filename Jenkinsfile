@@ -16,7 +16,7 @@ pipeline{
         stage("Clone App from Git"){
             steps{
                 echo "====++++  Clone App from Git ++++===="
-                git branch:"master", url: "https://github.com/mromdhani/08-jenkins-cicd-pipeline-maven-02-continious-delivery.git"
+                git branch:"master", url: "https://github.com/val7304/08-jenkins-cicd-pipeline-maven-02-continious-delivery.git"
             }          
         }
         // Build and Unit Test (Maven/JUnit)
@@ -32,7 +32,7 @@ pipeline{
             steps{
                 echo "====++++  Static Code Analysis (SonarQube) ++++===="
                 withSonarQubeEnv('my_sonarqube_in_docker') {  
-                   sh "mvn clean verify -DskipITs=true sonar:sonar -Dsonar.host.url=http://host.docker.internal:9000   -Dsonar.projectName=08-jenkins-cicd-pipeline-maven-01-continious-integration -Dsonar.projectKey=08-jenkins-cicd-pipeline-maven-01-continious-integration -Dsonar.projectVersion=$BUILD_NUMBER";
+                   sh "mvn clean package sonar:sonar -Dsonar.host.url=http://host.docker.internal:9000   -Dsonar.projectName=08-jenkins-cicd-pipeline-maven-01-continious-delivery -Dsonar.projectKey=08-jenkins-cicd-pipeline-maven-01-continious-delivery -Dsonar.projectVersion=$BUILD_NUMBER";
                 }  
             }           
         }
